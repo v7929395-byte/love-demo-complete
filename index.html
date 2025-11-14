@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Refractions of Desire - Dream Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #1a0b2e, #4a1e6b, #8b5fbf);
+            color: #f8f4ff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.7;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 浮动的心形背景 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 105, 180, 0.1) 2%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(147, 112, 219, 0.1) 2%, transparent 20%),
+                radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.1) 2%, transparent 20%);
+            z-index: -1;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0px) rotate(360deg); }
+        }
+        
+        .passage {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .passage::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            background: linear-gradient(45deg, #ff6b6b, #ffd700, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 107, 107, 0.8), 0 0 40px rgba(255, 215, 0, 0.6); }
+        }
+        
+        h2 {
+            font-family: 'Cinzel Decorative', cursive;
+            color: #ffd700;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(45deg, #ff6b6b, #ffd700, #4ecdc4) 1;
+            padding-bottom: 15px;
+            text-align: center;
+            font-size: 2em;
+        }
+        
+        .choice {
+            display: block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 30px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+        
+        .choice::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .choice:hover {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.5);
+        }
+        
+        .choice:hover::before {
+            left: 100%;
+        }
+        
+        .stats {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .stat-item strong {
+            display: block;
+            color: #ffd700;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .world-indicator {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 107, 107, 0.3));
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 1.3em;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .story-image {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .story-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .mirror-text {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(102, 126, 234, 0.2));
+            color: #e0f7fa;
+            font-style: italic;
+            border-left: 4px solid #4ecdc4;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 15px 15px 0;
+            position: relative;
+            font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+        
+        .mirror-text::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(78, 205, 196, 0.3);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: serif;
+        }
+        
+        .ending {
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b);
+            padding: 50px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ending::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1%, transparent 1%);
+            background-size: 50px 50px;
+            animation: sparkle 4s linear infinite;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        /* 特殊效果类 */
+        .romantic-glow {
+            animation: romanticGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes romanticGlow {
+            from { box-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
+            to { box-shadow: 0 0 40px rgba(255, 20, 147, 0.8), 0 0 60px rgba(255, 105, 180, 0.6); }
+        }
+        
+        .floating-hearts::before {
+            content: '♥';
+            position: absolute;
+            color: rgba(255, 105, 180, 0.6);
+            font-size: 2em;
+            animation: floatUp 6s linear infinite;
+        }
+        
+        .floating-hearts::after {
+            content: '♥';
+            position: absolute;
+            color: rgba(255, 215, 0, 0.6);
+            font-size: 1.5em;
+            animation: floatUp 8s linear infinite 2s;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(100px) rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+        
+        /* 填字游戏样式 */
+        .crossword-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 50px);
+            grid-gap: 2px;
+            margin: 20px auto;
+            justify-content: center;
+        }
+        
+        .crossword-cell {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ffd700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 215, 0, 0.1);
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .crossword-cell input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-size: 1.2em;
+            color: #ffd700;
+            text-transform: uppercase;
+        }
+        
+        .writing-interface {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #4ecdc4;
+        }
+        
+        .writing-textarea {
+            width: 100%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #4ecdc4;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1em;
+            resize: vertical;
+        }
+        
+        .music-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 音乐控制 -->
+    <div class="music-controls">
+        <button class="music-btn" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <!-- 浮动心形 -->
+    <div class="floating-hearts" style="position: fixed; top: 10%; left: 10%;"></div>
+    <div class="floating-hearts" style="position: fixed; top: 20%; right: 15%;"></div>
+    <div class="floating-hearts" style="position: fixed; bottom: 30%; left: 20%;"></div>
+
+    <!-- 音频元素 - 钢琴曲 -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- 游戏状态存储 -->
+    <script>
+        let gameState = {
+            linguisticAptitude: 0,
+            emotionalInsight: 0,
+            currentWorld: 'reality',
+            cinematicEchoes: [],
+            playerStory: "",
+            worldScores: {
+                gilded: 0,
+                sepia: 0,
+                neon: 0
+            },
+            worldSequence: [],
+            currentWorldIndex: 0,
+            crosswordAttempts: 0,
+            worldsCompleted: 0
+        };
+
+        // 音乐系统
+        let musicEnabled = true;
+
+        function toggleMusic() {
+            const music = document.getElementById('backgroundMusic');
+            if (musicEnabled) {
+                music.pause();
+                musicEnabled = false;
+            } else {
+                music.play();
+                musicEnabled = true;
+            }
+        }
+
+        // 自动播放音乐
+        window.addEventListener('click', function() {
+            const music = document.getElementById('backgroundMusic');
+            if (music.paused && musicEnabled) {
+                music.play().catch(e => console.log('Autoplay prevented'));
+            }
+        }, { once: true });
+
+        function updateStats(ling = 0, emo = 0, world = null) {
+            gameState.linguisticAptitude += ling;
+            gameState.emotionalInsight += emo;
+            if (world) {
+                gameState.worldScores[world] += (ling + emo);
+            }
+            updateStatsDisplay();
+        }
+
+        function updateStatsDisplay() {
+            document.getElementById('ling-stat').textContent = gameState.linguisticAptitude;
+            document.getElementById('emo-stat').textContent = gameState.emotionalInsight;
+        }
+
+        function addEcho(echoName) {
+            if (!gameState.cinematicEchoes.includes(echoName)) {
+                gameState.cinematicEchoes.push(echoName);
+            }
+        }
+
+        function showPassage(passageId) {
+            document.querySelectorAll('.passage').forEach(p => p.style.display = 'none');
+            document.getElementById(passageId).style.display = 'block';
+            updateStatsDisplay();
+        }
+
+        // 世界序列设置
+        function setWorldSequence(sequence) {
+            gameState.worldSequence = sequence;
+            gameState.currentWorldIndex = 0;
+            gameState.currentWorld = sequence[0];
+            gameState.worldsCompleted = 0;
+        }
+
+        // 核心修复：正确的世界转换逻辑
+        function proceedToNextWorld() {
+            gameState.worldsCompleted++;
+            
+            // 如果已经完成3个世界，进入最终写作
+            if (gameState.worldsCompleted >= 3) {
+                showPassage('final-writing');
+                return;
+            }
+
+            // 移动到序列中的下一个世界
+            gameState.currentWorldIndex++;
+            if (gameState.currentWorldIndex < gameState.worldSequence.length) {
+                const nextWorld = gameState.worldSequence[gameState.currentWorldIndex];
+                gameState.currentWorld = nextWorld;
+                
+                // 根据下一个世界显示相应的场景
+                if (nextWorld === 'gilded') {
+                    showPassage('gilded-start');
+                } else if (nextWorld === 'sepia') {
+                    showPassage('sepia-start');
+                } else if (nextWorld === 'neon') {
+                    showPassage('neon-start');
+                }
+            } else {
+                // 如果序列结束，进入最终写作
+                showPassage('final-writing');
+            }
+        }
+
+        // 填字游戏功能
+        function checkCrossword() {
+            const answers = {
+                '1-1': 'L', '1-2': 'O', '1-3': 'L', '1-4': 'I', '1-5': 'T', '1-6': 'A',
+                '2-1': 'L', '2-2': 'O', '2-3': 'L', '2-4': 'L', '2-5': 'I',
+                '3-1': 'L', '3-2': 'O', '3-3': 'V', '3-4': 'E'
+            };
+
+            let correct = true;
+            for (const [key, value] of Object.entries(answers)) {
+                const input = document.getElementById(`cell-${key}`);
+                if (!input || input.value.toUpperCase() !== value) {
+                    correct = false;
+                    break;
+                }
+            }
+
+            if (correct) {
+                gameState.crosswordAttempts = 0;
+                addEcho('Shattered Illusion');
+                proceedToNextWorld();
+            } else {
+                gameState.crosswordAttempts++;
+                if (gameState.crosswordAttempts >= 2) {
+                    showCrosswordAnswers();
+                } else {
+                    alert('Not quite right... Try again. Look for the patterns of obsession and innocence.');
+                }
+            }
+        }
+
+        function showCrosswordAnswers() {
+            const answers = {
+                '1-1': 'L', '1-2': 'O', '1-3': 'L', '1-4': 'I', '1-5': 'T', '1-6': 'A',
+                '2-1': 'L', '2-2': 'O', '2-3': 'L', '2-4': 'L', '2-5': 'I',
+                '3-1': 'L', '3-2': 'O', '3-3': 'V', '3-4': 'E'
+            };
+
+            for (const [key, value] of Object.entries(answers)) {
+                const input = document.getElementById(`cell-${key}`);
+                if (input) {
+                    input.value = value;
+                }
+            }
+
+            setTimeout(() => {
+                alert('The answers are: LOLITA, LOLLI, LOVE. Sometimes we need help to see the truth clearly.');
+                addEcho('Guided Revelation');
+                proceedToNextWorld();
+            }, 500);
+        }
+
+        // 保存个人故事
+        function saveStory() {
+            const storyText = document.getElementById('storyText').value;
+            gameState.playerStory = storyText;
+            localStorage.setItem('playerStory', storyText);
+            showFinalAnalysis();
+        }
+
+        // 加载保存的故事
+        function loadSavedStory() {
+            const saved = localStorage.getItem('playerStory');
+            if (saved) {
+                document.getElementById('storyText').value = saved;
+            }
+        }
+    </script>
+
+    <!-- 序幕：镜子 -->
+    <div id="prologue" class="passage romantic-glow" style="display: block;">
+        <h1>Refractions of Desire</h1>
+        <div style="text-align: center; margin: 20px 0;">
+            <span style="color: #ffd700;">✦</span>
+            <span style="color: #ff6b6b;">✦</span>
+            <span style="color: #4ecdc4;">✦</span>
+            <span style="color: #9b59b6;">✦</span>
+            <span style="color: #ffd700;">✦</span>
+        </div>
+        
+        <div class="image-container">
+            <img src="" alt="Enchanted Bedroom" class="story-image">
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <strong>💫 Linguistic</strong><br>
+                <span id="ling-stat">0</span>
+            </div>
+            <div class="stat-item">
+                <strong>💖 Emotional</strong><br>
+                <span id="emo-stat">0</span>
+            </div>
+        </div>
+
+        <p style="text-align: center; font-size: 1.2em; color: #ffd700;">"Where dreams and reality dance in the moonlight..."</p>
+
+        <p>Moonlight spills through your window, painting silver patterns on the floor. You hold the note, its words glowing with unspoken meaning.</p>
+        
+        <p><strong style="color: #ff6b6b;">"An 'A'. And a request to stay after class. For weeks, I replayed every possible meaning of that note."</strong></p>
+        
+        <p><strong style="color: #4ecdc4;">"What's wrong with me? He's my teacher. It's a boundary. I know this. So why does it feel like my heart is trying to cross it every time he looks at me?"</strong></p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Because you're asking the wrong question, little scholar. The stars themselves whisper your answer... It's not 'What's wrong with me?' It's 'What is this feeling, and what magic is it trying to teach me?'"</p>
+        </div>
+
+        <p>The mirror shimmers like liquid starlight, showing a confident version of yourself wreathed in moonbeams.</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "I'm the part of you that dances with shadows and catches moonlight. The part that knows an 'A' and a 'See me' note can feel more thrilling than any fairy tale. Come, let's paint our own constellations."</p>
+        </div>
+
+        <a class="choice" onclick="showPassage('world-selection')">
+            ✨ Step into the Starlight Portal ✨
+        </a>
+    </div>
+
+    <!-- 世界选择 -->
+    <div id="world-selection" class="passage" style="display: none;">
+        <h2>Choose Your Celestial Reflection</h2>
+        
+        <div class="image-container">
+            <img src="" alt="Starlight Portal" class="story-image">
+        </div>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Each reflection is a different color of love's rainbow. Choose the hue that calls to your soul tonight..."</p>
+        </div>
+
+        <div class="world-choices">
+            <a class="choice" onclick="setWorldSequence(['gilded', 'sepia', 'neon']); addEcho('Golden Whirlpool'); showPassage('gilded-start')">
+                🌟 The Gilded Whirlpool 🌟<br>
+                <small>Sequence: Lolita → The Lover → Breakfast Club</small>
+            </a>
+            
+            <a class="choice" onclick="setWorldSequence(['sepia', 'gilded', 'neon']); addEcho('Sepia Haze'); showPassage('sepia-start')">
+                🍂 The Sepia Haze 🍂<br>
+                <small>Sequence: The Lover → Lolita → Breakfast Club</small>
+            </a>
+            
+            <a class="choice" onclick="setWorldSequence(['neon', 'sepia', 'gilded']); addEcho('Neon Fracture'); showPassage('neon-start')">
+                💥 The Neon Fracture 💥<br>
+                <small>Sequence: Breakfast Club → The Lover → Lolita</small>
+            </a>
+        </div>
+    </div>
+
+    <!-- 洛丽塔世界开始 -->
+    <div id="gilded-start" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌟 The Gilded Whirlpool • Where Dreams Turn Golden 🌟
+        </div>
+        
+        <div class="image-container">
+            <img src="" alt="Golden Sunbeam Street" class="story-image">
+        </div>
+
+        <p>You step into a world where everything glows with eternal sunset. The air tastes like honey and summer roses.</p>
+        
+        <p>You touch your hair - now flowing gold like liquid sunlight. <strong style="color: #ffd700;">"My... my hair... it's like captured starlight..."</strong></p>
+
+        <p>A car made of sunlight and dreams pulls up. The driver's smile holds both warmth and warning.</p>
+
+        <p><strong style="color: #e74c3c;">Humbert:</strong> "Well, hello there. You seem to have stolen all the starlight for your hair."</p>
+        <p><strong style="color: #e74c3c;">Humbert:</strong> "Can I offer a ride to someone who outshines the sun itself?"</p>
+
+        <a class="choice" onclick="updateStats(3, -1, 'gilded'); showPassage('gilded-response-playful')">
+            💋 "Is that your best line, mister?"<br>
+            <small>+3 Linguistic, -1 Emotional • Play with fire</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(1, 2, 'gilded'); showPassage('gilded-response-polite')">
+            🛡️ "No, thank you. I'm waiting for my mother."<br>
+            <small>+1 Linguistic, +2 Emotional • Build boundaries</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(0, 3, 'gilded'); showPassage('gilded-response-vulnerable')">
+            🦋 "I... I don't know where I am."<br>
+            <small>+3 Emotional • Show vulnerability</small>
+        </a>
+    </div>
+
+    <!-- 洛丽塔世界回应 - 礼貌选项 -->
+    <div id="gilded-response-polite" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌟 The Gilded Whirlpool
+        </div>
+
+        <div class="image-container">
+            <img src="" alt="Humbert's Reaction" class="story-image">
+        </div>
+
+        <p><strong style="color: #e74c3c;">Humbert:</strong> "A dutiful daughter. How... modern."</p>
+        <p>The car doesn't move, but his gaze intensifies. The golden light seems to pulse around you.</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Good. You set a boundary. But he's testing it. Notice how he doesn't accept your refusal? The dance has begun."</p>
+        </div>
+
+        <p><strong style="color: #e74c3c;">Humbert:</strong> "Surely your mother wouldn't mind if you had some ice cream? There's a wonderful parlor just down the street. The strawberry is particularly... enchanting."</p>
+
+        <a class="choice" onclick="showPassage('gilded-ice-cream-accept')">
+            🍓 "Alright, just for a moment."<br>
+            <small>Accept reluctantly</small>
+        </a>
+        
+        <a class="choice" onclick="showPassage('gilded-crossword')">
+            ❌ "I really must go home."<br>
+            <small>Stand your ground</small>
+        </a>
+    </div>
+
+    <!-- 接受冰淇淋 -->
+    <div id="gilded-ice-cream-accept" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌟 The Sweet Trap
+        </div>
+
+        <div class="image-container">
+            <img src="" alt="Ice Cream Parlor" class="story-image">
+        </div>
+
+        <p>You find yourself in a pastel-colored ice cream parlor that smells of sugar and nostalgia.</p>
+
+        <p><strong style="color: #e74c3c;">Humbert:</strong> "For my little ray of sunshine. The sweetest thing in this room."</p>
+
+        <p>The ice cream is cloyingly sweet. As you take a bite, the world begins to waver...</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Some sweetness is poison in disguise. You've tasted the golden cage. Now feel its bars."</p>
+        </div>
+
+        <a class="choice" onclick="addEcho('Golden Cage'); proceedToNextWorld()">
+            🌹 Continue Your Journey<br>
+            <small>The next reflection awaits</small>
+        </a>
+    </div>
+
+    <!-- 其他洛丽塔回应场景 -->
+    <div id="gilded-response-playful" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌟 The Gilded Whirlpool
+        </div>
+        <p><strong style="color: #e74c3c;">Humbert:</strong> "My, aren't you a bright little thing. Gets better with practice, I assure you."</p>
+        <a class="choice" onclick="showPassage('gilded-crossword')">Continue to the Truth</a>
+    </div>
+
+    <div id="gilded-response-vulnerable" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌟 The Gilded Whirlpool
+        </div>
+        <p><strong style="color: #e74c3c;">Humbert:</strong> "A lost little lamb. How intriguing. All the more reason to get you somewhere safe."</p>
+        <a class="choice" onclick="showPassage('gilded-crossword')">Continue to the Truth</a>
+    </div>
+
+    <!-- 填字游戏 -->
+    <div id="gilded-crossword" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🔮 Unweave the Golden Spell 🔮
+        </div>
+
+        <div class="image-container">
+            <img src="" alt="Magical Crossword" class="story-image">
+        </div>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Every enchantment has its true name. Speak the words that bind this golden cage, and watch the illusion shatter like glass..."</p>
+        </div>
+
+        <div class="crossword-grid">
+            <!-- 第一行 LOLITA -->
+            <div class="crossword-cell">1</div><div class="crossword-cell"><input type="text" maxlength="1" id="cell-1-1"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-1-2"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-1-3"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-1-4"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-1-5"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-1-6"></div>
+            
+            <!-- 第二行 LOLLI -->
+            <div class="crossword-cell">2</div><div class="crossword-cell"><input type="text" maxlength="1" id="cell-2-1"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-2-2"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-2-3"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-2-4"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-2-5"></div>
+            <div class="crossword-cell" style="border: none;"></div>
+            
+            <!-- 第三行 LOVE -->
+            <div class="crossword-cell">3</div><div class="crossword-cell"><input type="text" maxlength="1" id="cell-3-1"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-3-2"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-3-3"></div>
+            <div class="crossword-cell"><input type="text" maxlength="1" id="cell-3-4"></div>
+            <div class="crossword-cell" style="border: none;"></div>
+            <div class="crossword-cell" style="border: none;"></div>
+        </div>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <p><strong>Across 1:</strong> (7 Letters) The name he gives his obsession</p>
+            <p><strong>Down 1:</strong> (5 Letters) Sweetness masking danger</p>
+            <p><strong>Across 2:</strong> (4 Letters) The emotion he claims to feel</p>
+        </div>
+
+        <a class="choice" onclick="checkCrossword()">
+            ✨ Submit Answers ✨
+        </a>
+    </div>
+
+    <!-- 情人世界开始 -->
+    <div id="sepia-start" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🍂 The Sepia Haze • Where Love Whispers in Autumn 🍂
+        </div>
+        
+        <div class="image-container">
+            <img src="" alt="Mystical River at Dusk" class="story-image">
+        </div>
+
+        <p>The world shifts to warm sepia tones, like an old photograph coming to life. The river flows with liquid amber.</p>
+        
+        <p>In the water's reflection, you see a stranger with knowing eyes. <strong style="color: #d35400;">"That's... not me. Or is it all of me?"</strong></p>
+
+        <p>A voice like aged whiskey and forgotten letters speaks beside you.</p>
+
+        <p><strong style="color: #f39c12;">The Lover:</strong> "The river shows us who we need to become. It brought you to me, as it brings autumn after summer."</p>
+        <p><strong style="color: #f39c12;">The Lover:</strong> "My carriage awaits. Let me show you beauty that hurts to behold."</p>
+
+        <a class="choice" onclick="updateStats(0, 2, 'sepia'); showPassage('sepia-touch')">
+            ✋ Take his offered hand<br>
+            <small>Let mystery guide you</small>
+        </a>
+    </div>
+
+    <!-- 手指触摸游戏 -->
+    <div id="sepia-touch" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🍂 The Language of Touch 🍂
+        </div>
+        
+        <div class="image-container">
+            <img src="" alt="Hands Almost Touching" class="story-image">
+        </div>
+
+        <p>In the intimate twilight of the carriage, his hand rests near yours - a question written in skin and silence.</p>
+
+        <p><strong style="color: #f39c12;">The Lover:</strong> "You are far from everything you knew. Good. Some truths can only be found in foreign lands."</p>
+
+        <p>How will you answer this unspoken poem?</p>
+
+        <a class="choice" onclick="updateStats(2, 1, 'sepia'); showPassage('sepia-house')">
+            🖐️ Gently stroke his knuckle<br>
+            <small>+2 Linguistic, +1 Emotional • A delicate reply</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(1, 3, 'sepia'); showPassage('sepia-house')">
+            👆 Tentative fingertip touch<br>
+            <small>+1 Linguistic, +3 Emotional • A questioning caress</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(3, 0, 'sepia'); showPassage('sepia-house')">
+            🤝 Boldly intertwine fingers<br>
+            <small>+3 Linguistic • A confident answer</small>
+        </a>
+    </div>
+
+    <!-- 情人府邸 -->
+    <div id="sepia-house" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🍂 The Sepia Haze - The Mansion
+        </div>
+        
+        <div class="image-container">
+            <img src="" alt="Lover's Mansion" class="story-image">
+        </div>
+
+        <p><strong style="color: #f39c12;">The Lover:</strong> "Make yourself at home. I must speak with the servants. You may explore... within reason."</p>
+
+        <p>The mansion whispers with secrets. Which corridor calls to your curious heart?</p>
+
+        <a class="choice" onclick="showPassage('sepia-shrine')">
+            🏛️ Explore the left corridor<br>
+            <small>Follow the scent of sandalwood and tradition</small>
+        </a>
+        
+        <a class="choice" onclick="showPassage('sepia-orchids')">
+            🌸 Explore the right corridor<br>
+            <small>Follow the fading fragrance of flowers</small>
+        </a>
+    </div>
+
+    <!-- 祠堂场景 -->
+    <div id="sepia-shrine" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🏛️ The Ancestral Shrine
+        </div>
+
+        <div class="image-container">
+            <img src="" alt="Ancestral Shrine" class="story-image">
+        </div>
+
+        <p>You enter a somber room dominated by a large, vividly colored ancestral portrait from Guangzhou. The air smells of incense and obligation.</p>
+
+        <p><strong style="color: #f39c12;">The Lover:</strong> "My family. In Guangzhou. They see everything. They own everything... including me."</p>
+
+        <p>His voice is stripped of its earlier composure, filled with the weight of generations.</p>
+
+        <p><strong style="color: #f39c12;">The Lover:</strong> "This... what we are doing... is an act of rebellion for me. A small, pathetic one. I am a rich man's son, a coward. I cannot defy them in the light, so I seek defiance in the dark... with you."</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "He reveals the chains that bind him - golden chains, but chains nonetheless. Notice how his rebellion is still within the cage of expectation?"</p>
+        </div>
+
+        <a class="choice" onclick="updateStats(2, 3, 'sepia'); addEcho('Family Chains'); proceedToNextWorld()">
+            💔 Continue Your Journey<br>
+            <small>The next reflection calls</small>
+        </a>
+    </div>
+
+    <!-- 兰花场景 -->
+    <div id="sepia-orchids" class="passage" style="display: none;">
+        <div class="world-indicator">
+            🌸 The Bedroom with Orchids
+        </div>
+
+        <div class="image-container">
+            <img src="" alt="Withered Orchids" class="story-image">
+        </div>
+
+        <p>You enter an ornate bedroom where time seems to have slowed. A pot of withered orchids sits on the nightstand, their beauty faded but still poignant.</p>
+
+        <p><strong style="color: #f39c12;">The Lover:</strong> "I tried to keep it alive. Beautiful things... they are so fragile here. The heat, the dust... it kills them."</p>
+
+        <p>His voice is tender, full of the kind of regret that comes from loving something too much.</p>
+
+        <p><strong style="color: #f39c12;">The Lover:</strong> "You remind me of it. When it first bloomed. A beauty that does not belong to this place. That is why I had to have you near me. To remember that such things can exist, even for a moment."</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "He sees beauty as something to possess, to preserve against the ravages of time. But true beauty must be free to wither and bloom on its own terms."</p>
+        </div>
+
+        <a class="choice" onclick="updateStats(1, 4, 'sepia'); addEcho('Withered Beauty'); proceedToNextWorld()">
+            🥀 Continue Your Journey<br>
+            <small>The story unfolds further</small>
+        </a>
+    </div>
+
+    <!-- 早餐俱乐部世界开始 -->
+    <div id="neon-start" class="passage" style="display: none;">
+        <div class="world-indicator">
+            💥 The Neon Fracture - Breakfast Club World
+        </div>
+        
+        <div class="image-container">
+            <img src="" alt="High School Library" class="story-image">
+        </div>
+
+        <p>The door bursts open. A stocky, weary man strides in - the detention supervisor.</p>
+
+        <p><strong style="color: #9b59b6;">Mr. Vernon:</strong> "Let's get one thing straight. This is not a debate club. You will not move. You will not speak. You will write a one-thousand-word essay answering the question: 'Who do you think you are?'"</p>
+
+        <p>A girl across from you - Allison, dressed all in black - flicks a pencil toward you.</p>
+
+        <p><strong style="color: #8e44ad;">Allison:</strong> "Your shoe is untied."</p>
+
+        <a class="choice" onclick="updateStats(2, 0, 'neon'); showPassage('neon-allison')">
+            🔥 Flick it back harder<br>
+            <small>+2 Linguistic • Meet fire with fire</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(0, 2, 'neon'); showPassage('neon-writing')">
+            📝 Ignore it, start writing<br>
+            <small>+2 Emotional • Choose introspection</small>
+        </a>
+        
+        <a class="choice" onclick="updateStats(1, 1, 'neon'); showPassage('neon-allison')">
+            💢 Pick it up, break it in half<br>
+            <small>+1 Linguistic, +1 Emotional • Make a statement</small>
+        </a>
+    </div>
+
+    <!-- 跟随艾莉森 -->
+    <div id="neon-allison" class="passage" style="display: none;">
+        <div class="world-indicator">
+            💥 The Neon Fracture - Adventure
+        </div>
+
+        <div class="image-container">
+            <img src="" alt="School Hallways" class="story-image">
+        </div>
+
+        <p><strong style="color: #8e44ad;">Allison:</strong> "You're not like them. You're... passing through. Come on, I'll show you something better than this prison."</p>
+
+        <p>You follow Allison through neon-lit hallways, discovering the secrets teachers hide in their lockers.</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Even authority figures have their hidden vulnerabilities. Remember this when you think about your teacher - everyone wears masks."</p>
+        </div>
+
+        <a class="choice" onclick="addEcho('Locker Secrets'); proceedToNextWorld()">
+            ✍️ Continue Your Journey<br>
+            <small>The final reflection awaits</small>
+        </a>
+    </div>
+
+    <!-- 写作路径 -->
+    <div id="neon-writing" class="passage" style="display: none;">
+        <div class="world-indicator">
+            💥 The Neon Fracture - Reflection
+        </div>
+
+        <div class="image-container">
+            <img src="" alt="Writing Desk" class="story-image">
+        </div>
+
+        <p>You choose to stay and write your essay. The words flow from you, revealing truths you didn't know you possessed about identity, love, and the masks we all wear.</p>
+
+        <p><strong style="color: #9b59b6;">Mr. Vernon:</strong> "Still here? Maybe you understand more than I thought."</p>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Sometimes the quiet path reveals the loudest truths. You've found wisdom in stillness while others sought it in noise."</p>
+        </div>
+
+        <a class="choice" onclick="addEcho('Scholar\'s Path'); proceedToNextWorld()">
+            ✍️ Continue Your Journey<br>
+            <small>Your journey nears its end</small>
+        </a>
+    </div>
+
+    <!-- 最终写作界面 -->
+    <div id="final-writing" class="passage" style="display: none;">
+        <h2>Write Your Own Story ✨</h2>
+
+        <div class="image-container">
+            <img src="" alt="Writing Your Destiny" class="story-image">
+        </div>
+
+        <div class="writing-interface">
+            <p style="text-align: center; color: #ffd700; font-size: 1.2em;"><em>Now it's your turn. What have you learned about love, boundaries, and yourself through these refractions?</em></p>
+            
+            <textarea class="writing-textarea" id="storyText" placeholder="Write your story here... What does love mean to you now? What boundaries will you keep? Who are you becoming after dancing through these dreams?"></textarea>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="choice" onclick="saveStory()" style="display: inline-block; width: auto; padding: 15px 30px;">
+                    💾 Save My Story to the Stars
+                </button>
+            </div>
+        </div>
+
+        <div class="mirror-text">
+            <p><strong>Mirror Vivian:</strong> "Your words have power. Write the truth you've discovered in all these reflections. This story will be kept in the constellation of your becoming."</p>
+        </div>
+    </div>
+
+    <!-- 最终分析 -->
+    <div id="final-analysis" class="passage" style="display: none;">
+        <div class="ending">
+            <h2>Your Reflection's True Colors 🌈</h2>
+
+            <div class="image-container">
+                <img src="" alt="Your True Colors" class="story-image">
+            </div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <strong>Final Journey</strong><br>
+                    💫 Linguistic: <span id="final-ling">0</span><br>
+                    💖 Emotional: <span id="final-emo">0</span>
+                </div>
+                <div class="stat-item">
+                    <strong>World Alignment</strong><br>
+                    🌟 Golden: <span id="gold-score">0</span><br>
+                    🍂 Sepia: <span id="sepia-score">0</span><br>
+                    💥 Neon: <span id="neon-score">0</span>
+                </div>
+            </div>
+
+            <div id="color-analysis" style="text-align: center; margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px;">
+                <!-- 颜色分析将由JavaScript动态生成 -->
+            </div>
+
+            <div class="mirror-text">
+                <p><strong>Your Personal Story, Written in Starlight:</strong></p>
+                <p id="displayed-story" style="font-style: normal; margin: 15px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;"></p>
+            </div>
+
+            <a class="choice" onclick="location.reload()">
+                🔄 Begin the Magic Again
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 初始化显示
+        updateStatsDisplay();
+        loadSavedStory();
+
+        // 最终分析函数
+        function showFinalAnalysis() {
+            // 更新最终分数显示
+            document.getElementById('final-ling').textContent = gameState.linguisticAptitude;
+            document.getElementById('final-emo').textContent = gameState.emotionalInsight;
+            document.getElementById('gold-score').textContent = gameState.worldScores.gilded;
+            document.getElementById('sepia-score').textContent = gameState.worldScores.sepia;
+            document.getElementById('neon-score').textContent = gameState.worldScores.neon;
+            document.getElementById('displayed-story').textContent = gameState.playerStory;
+
+            // 颜色分析
+            const analysisDiv = document.getElementById('color-analysis');
+            const maxWorld = Object.keys(gameState.worldScores).reduce((a, b) => 
+                gameState.worldScores[a] > gameState.worldScores[b] ? a : b
+            );
+
+            let analysisText = '';
+            if (maxWorld === 'gilded') {
+                analysisText = `<h3 style="color: #ffd700;">🌟 Golden Reflection - The Lolita Path</h3>
+                <p>You are drawn to the golden light of obsession, where love blurs with possession. Like Lolita, you dance in dangerous sunlight, finding beauty in the forbidden.</p>
+                <p><em>"I am the object of desire, but I will not be possessed. I walk in golden light but own my own shadow."</em></p>`;
+            } else if (maxWorld === 'sepia') {
+                analysisText = `<h3 style="color: #8b7355;">🍂 Sepia Reflection - The Lover's Path</h3>
+                <p>You walk in sepia tones of memory and melancholy, understanding that some loves are beautiful because they cannot last. Like Marguerite Duras, you find poetry in transience.</p>
+                <p><em>"I love in the spaces between, where silence speaks louder than words, and every ending contains its own beautiful beginning."</em></p>`;
+            } else {
+                analysisText = `<h3 style="color: #ff6b6b;">💥 Neon Reflection - The Rebel's Path</h3>
+                <p>You break molds in electric colors, challenging every boundary and definition. Like the Breakfast Club, you refuse to be categorized, writing your own rules of love and identity.</p>
+                <p><em>"I am not what you see - I am what I choose to become. My heart beats in colors you cannot name."</em></p>`;
+            }
+
+            analysisDiv.innerHTML = analysisText;
+            showPassage('final-analysis');
+        }
+
+        // 修改保存故事函数
+        function saveStory() {
+            const storyText = document.getElementById('storyText').value;
+            if (storyText.trim() === '') {
+                alert('Please write your story before saving. Your words are important.');
+                return;
+            }
+            gameState.playerStory = storyText;
+            localStorage.setItem('playerStory', storyText);
+            showFinalAnalysis();
+        }
+
+        // 添加随机星光效果
+        setInterval(() => {
+            const stars = document.createElement('div');
+            stars.style.cssText = `
+                position: fixed;
+                width: 2px;
+                height: 2px;
+                background: white;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: -1;
+                animation: twinkle 1s ease-in-out;
+            `;
+            stars.style.left = Math.random() * 100 + '%';
+            stars.style.top = Math.random() * 100 + '%';
+            document.body.appendChild(stars);
+            
+            setTimeout(() => stars.remove(), 1000);
+        }, 500);
+    </script>
+
+    <style>
+        @keyframes twinkle {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+    </style>
+</body>
+</html>
